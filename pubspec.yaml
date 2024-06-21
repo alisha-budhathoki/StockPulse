@@ -23,10 +23,15 @@ dependencies:
   shimmer: ^3.0.0
   mockito: ^5.4.4
   flutter_rating_bar: ^4.0.1
+  dio: ^5.4.3+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.0
+  freezed: ^2.5.2
+  build_runner: ^2.4.11
+  json_serializable: ^6.8.0
+
 flutter:
   uses-material-design: true
