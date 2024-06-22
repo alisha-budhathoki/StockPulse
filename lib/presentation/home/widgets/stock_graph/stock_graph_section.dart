@@ -34,6 +34,7 @@ class StockGraphSectionState extends State<StockGraphSection> {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SizedBox(
             height: 250.0,
