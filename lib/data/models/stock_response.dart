@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'stock_data.freezed.dart';
-part 'stock_data.g.dart';
+part 'stock_response.freezed.dart';
+part 'stock_response.g.dart';
 
 @freezed
 class StockData with _$StockData {

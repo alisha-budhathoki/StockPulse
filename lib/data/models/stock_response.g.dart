@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'stock_data.dart';
+part of 'stock_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

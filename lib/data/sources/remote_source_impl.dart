@@ -6,11 +6,8 @@ import 'package:stock_pulse/data/sources/remote_source.dart';
 import 'package:universal_io/io.dart';
 
 class RemoteSourceImpl implements RemoteSource {
-  RemoteSourceImpl({required String baseUrl}) {
-    _initiateNewDio(baseUrl);
-  }
-
-  late Dio dio;
+  RemoteSourceImpl({required this.dio});
+  final Dio dio;
 
   @override
   Future<Map<String, dynamic>> get(
@@ -50,16 +47,6 @@ class RemoteSourceImpl implements RemoteSource {
     } on DioException catch (e) {
       throw _handleDioError(e);
     }
-  }
-
-  void _initiateNewDio(String baseUrl) {
-    dio = Dio(
-      BaseOptions(
-        baseUrl: baseUrl,
-        connectTimeout: const Duration(seconds: 50),
-        headers: {'origin': 'mobile'},
-      ),
-    );
   }
 
   Exception _handleDioError(DioException exception) {

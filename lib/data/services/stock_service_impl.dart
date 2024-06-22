@@ -1,4 +1,4 @@
-import 'package:stock_pulse/data/models/stock_data.dart';
+import 'package:stock_pulse/data/models/stock_response.dart';
 import 'package:stock_pulse/data/services/stock_service.dart';
 import 'package:stock_pulse/data/sources/remote_source.dart';
 
@@ -7,11 +7,13 @@ class StockServiceImpl implements StockService {
 
   final RemoteSource remoteSource;
 
+  String baseUrl =
+      'https://run.mocky.io/v3/366e2a71-3413-49e7-91d2-f7e2dd927df8';
+
   @override
-  Future<StockResponse> fetchStocks(String interval) async {
+  Future<StockResponse> fetchStocks() async {
     try {
-      final response = await remoteSource
-          .get('https://run.mocky.io/v3/635a5517-f09e-4f79-b026-2d5c2fb0c09e');
+      final response = await remoteSource.get(baseUrl);
       return StockResponse.fromJson(response);
     } catch (e) {
       rethrow;

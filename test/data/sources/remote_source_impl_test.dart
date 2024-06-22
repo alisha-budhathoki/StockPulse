@@ -12,11 +12,9 @@ void main() {
   late RemoteSourceImpl remoteSource;
   late MockDio mockDio;
 
-  const String baseUrl = 'https://example.com';
-
   setUp(() {
     mockDio = MockDio();
-    remoteSource = RemoteSourceImpl(baseUrl: baseUrl)..dio = mockDio;
+    remoteSource = RemoteSourceImpl(dio: mockDio);
   });
 
   group('RemoteSourceImpl', () {
