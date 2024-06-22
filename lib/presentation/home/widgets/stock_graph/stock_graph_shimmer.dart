@@ -6,35 +6,39 @@ class StockGraphShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
-      children: [
-        ShimmerLoadingIndicator(
-          width: double.infinity,
-          height: 300,
-        ),
-        SizedBox(height: 16),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Column(
           children: [
             ShimmerLoadingIndicator(
-              width: 40,
-              height: 20,
+              width: constraints.maxWidth,
+              height: constraints.maxHeight * 0.75,
             ),
-            ShimmerLoadingIndicator(
-              width: 40,
-              height: 20,
-            ),
-            ShimmerLoadingIndicator(
-              width: 40,
-              height: 20,
-            ),
-            ShimmerLoadingIndicator(
-              width: 40,
-              height: 20,
+            const SizedBox(height: 16),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ShimmerLoadingIndicator(
+                  width: 40,
+                  height: 20,
+                ),
+                ShimmerLoadingIndicator(
+                  width: 40,
+                  height: 20,
+                ),
+                ShimmerLoadingIndicator(
+                  width: 40,
+                  height: 20,
+                ),
+                ShimmerLoadingIndicator(
+                  width: 40,
+                  height: 20,
+                ),
+              ],
             ),
           ],
-        ),
-      ],
+        );
+      },
     );
   }
 }
