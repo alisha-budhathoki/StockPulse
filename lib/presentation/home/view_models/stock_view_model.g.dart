@@ -45,7 +45,7 @@ _$FormattedStockDataImpl _$$FormattedStockDataImplFromJson(
       formattedTime: json['formattedTime'] as String,
       index: (json['index'] as num).toDouble(),
       change: (json['change'] as num).toDouble(),
-      percent_change: (json['percent_change'] as num).toDouble(),
+      percentChange: (json['percentChange'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$FormattedStockDataImplToJson(
@@ -55,7 +55,7 @@ Map<String, dynamic> _$$FormattedStockDataImplToJson(
       'formattedTime': instance.formattedTime,
       'index': instance.index,
       'change': instance.change,
-      'percent_change': instance.percent_change,
+      'percentChange': instance.percentChange,
     };
 
 _$MarketSummaryViewModelImpl _$$MarketSummaryViewModelImplFromJson(

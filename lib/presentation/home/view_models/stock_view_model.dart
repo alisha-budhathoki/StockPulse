@@ -43,7 +43,7 @@ class FormattedStockData with _$FormattedStockData {
     required String formattedTime,
     required double index,
     required double change,
-    required double percent_change,
+    required double percentChange,
   }) = _FormattedStockData;
 
   factory FormattedStockData.fromJson(Map<String, dynamic> json) =>
@@ -55,7 +55,7 @@ class FormattedStockData with _$FormattedStockData {
       formattedTime: DateFormat('MMMM d, yyyy').format(data.date),
       index: data.index,
       change: data.change,
-      percent_change: data.percent_change,
+      percentChange: data.percent_change,
     );
   }
 }

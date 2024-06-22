@@ -325,7 +325,7 @@ mixin _$FormattedStockData {
   String get formattedTime => throw _privateConstructorUsedError;
   double get index => throw _privateConstructorUsedError;
   double get change => throw _privateConstructorUsedError;
-  double get percent_change => throw _privateConstructorUsedError;
+  double get percentChange => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -344,7 +344,7 @@ abstract class $FormattedStockDataCopyWith<$Res> {
       String formattedTime,
       double index,
       double change,
-      double percent_change});
+      double percentChange});
 }
 
 /// @nodoc
@@ -364,7 +364,7 @@ class _$FormattedStockDataCopyWithImpl<$Res, $Val extends FormattedStockData>
     Object? formattedTime = null,
     Object? index = null,
     Object? change = null,
-    Object? percent_change = null,
+    Object? percentChange = null,
   }) {
     return _then(_value.copyWith(
       date: null == date
@@ -383,9 +383,9 @@ class _$FormattedStockDataCopyWithImpl<$Res, $Val extends FormattedStockData>
           ? _value.change
           : change // ignore: cast_nullable_to_non_nullable
               as double,
-      percent_change: null == percent_change
-          ? _value.percent_change
-          : percent_change // ignore: cast_nullable_to_non_nullable
+      percentChange: null == percentChange
+          ? _value.percentChange
+          : percentChange // ignore: cast_nullable_to_non_nullable
               as double,
     ) as $Val);
   }
@@ -404,7 +404,7 @@ abstract class _$$FormattedStockDataImplCopyWith<$Res>
       String formattedTime,
       double index,
       double change,
-      double percent_change});
+      double percentChange});
 }
 
 /// @nodoc
@@ -422,7 +422,7 @@ class __$$FormattedStockDataImplCopyWithImpl<$Res>
     Object? formattedTime = null,
     Object? index = null,
     Object? change = null,
-    Object? percent_change = null,
+    Object? percentChange = null,
   }) {
     return _then(_$FormattedStockDataImpl(
       date: null == date
@@ -441,9 +441,9 @@ class __$$FormattedStockDataImplCopyWithImpl<$Res>
           ? _value.change
           : change // ignore: cast_nullable_to_non_nullable
               as double,
-      percent_change: null == percent_change
-          ? _value.percent_change
-          : percent_change // ignore: cast_nullable_to_non_nullable
+      percentChange: null == percentChange
+          ? _value.percentChange
+          : percentChange // ignore: cast_nullable_to_non_nullable
               as double,
     ));
   }
@@ -457,7 +457,7 @@ class _$FormattedStockDataImpl implements _FormattedStockData {
       required this.formattedTime,
       required this.index,
       required this.change,
-      required this.percent_change});
+      required this.percentChange});
 
   factory _$FormattedStockDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$FormattedStockDataImplFromJson(json);
@@ -471,11 +471,11 @@ class _$FormattedStockDataImpl implements _FormattedStockData {
   @override
   final double change;
   @override
-  final double percent_change;
+  final double percentChange;
 
   @override
   String toString() {
-    return 'FormattedStockData(date: $date, formattedTime: $formattedTime, index: $index, change: $change, percent_change: $percent_change)';
+    return 'FormattedStockData(date: $date, formattedTime: $formattedTime, index: $index, change: $change, percentChange: $percentChange)';
   }
 
   @override
@@ -488,14 +488,14 @@ class _$FormattedStockDataImpl implements _FormattedStockData {
                 other.formattedTime == formattedTime) &&
             (identical(other.index, index) || other.index == index) &&
             (identical(other.change, change) || other.change == change) &&
-            (identical(other.percent_change, percent_change) ||
-                other.percent_change == percent_change));
+            (identical(other.percentChange, percentChange) ||
+                other.percentChange == percentChange));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType, date, formattedTime, index, change, percent_change);
+      runtimeType, date, formattedTime, index, change, percentChange);
 
   @JsonKey(ignore: true)
   @override
@@ -518,7 +518,7 @@ abstract class _FormattedStockData implements FormattedStockData {
       required final String formattedTime,
       required final double index,
       required final double change,
-      required final double percent_change}) = _$FormattedStockDataImpl;
+      required final double percentChange}) = _$FormattedStockDataImpl;
 
   factory _FormattedStockData.fromJson(Map<String, dynamic> json) =
       _$FormattedStockDataImpl.fromJson;
@@ -532,7 +532,7 @@ abstract class _FormattedStockData implements FormattedStockData {
   @override
   double get change;
   @override
-  double get percent_change;
+  double get percentChange;
   @override
   @JsonKey(ignore: true)
   _$$FormattedStockDataImplCopyWith<_$FormattedStockDataImpl> get copyWith =>
