@@ -18,7 +18,7 @@ class CircularLoadingIndicator extends StatelessWidget {
         value: value,
         strokeWidth: 3.0,
         backgroundColor: Palette.background.shade3,
-        valueColor: AlwaysStoppedAnimation(color ?? Palette.primaryDark.shade3),
+        valueColor: AlwaysStoppedAnimation(color ?? Palette.primary.shade3),
       ),
     );
   }

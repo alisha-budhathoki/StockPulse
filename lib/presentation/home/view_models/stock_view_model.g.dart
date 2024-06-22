@@ -8,16 +8,21 @@ part of 'stock_view_model.dart';
 
 _$StockViewModelImpl _$$StockViewModelImplFromJson(Map<String, dynamic> json) =>
     _$StockViewModelImpl(
-      hourly: (json['hourly'] as List<dynamic>)
+      marketSummary: MarketSummaryViewModel.fromJson(
+          json['marketSummary'] as Map<String, dynamic>),
+      minuteData: (json['minuteData'] as List<dynamic>)
           .map((e) => FormattedStockData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      daily: (json['daily'] as List<dynamic>)
+      hourData: (json['hourData'] as List<dynamic>)
           .map((e) => FormattedStockData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      monthly: (json['monthly'] as List<dynamic>)
+      dayData: (json['dayData'] as List<dynamic>)
           .map((e) => FormattedStockData.fromJson(e as Map<String, dynamic>))
           .toList(),
-      yearly: (json['yearly'] as List<dynamic>)
+      monthData: (json['monthData'] as List<dynamic>)
+          .map((e) => FormattedStockData.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      yearlyData: (json['yearlyData'] as List<dynamic>)
           .map((e) => FormattedStockData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -25,24 +30,46 @@ _$StockViewModelImpl _$$StockViewModelImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$StockViewModelImplToJson(
         _$StockViewModelImpl instance) =>
     <String, dynamic>{
-      'hourly': instance.hourly,
-      'daily': instance.daily,
-      'monthly': instance.monthly,
-      'yearly': instance.yearly,
+      'marketSummary': instance.marketSummary,
+      'minuteData': instance.minuteData,
+      'hourData': instance.hourData,
+      'dayData': instance.dayData,
+      'monthData': instance.monthData,
+      'yearlyData': instance.yearlyData,
     };
 
 _$FormattedStockDataImpl _$$FormattedStockDataImplFromJson(
         Map<String, dynamic> json) =>
     _$FormattedStockDataImpl(
-      time: DateTime.parse(json['time'] as String),
+      date: DateTime.parse(json['date'] as String),
       formattedTime: json['formattedTime'] as String,
-      price: (json['price'] as num).toDouble(),
+      index: (json['index'] as num).toDouble(),
+      change: (json['change'] as num).toDouble(),
+      percent_change: (json['percent_change'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$$FormattedStockDataImplToJson(
         _$FormattedStockDataImpl instance) =>
     <String, dynamic>{
-      'time': instance.time.toIso8601String(),
+      'date': instance.date.toIso8601String(),
       'formattedTime': instance.formattedTime,
-      'price': instance.price,
+      'index': instance.index,
+      'change': instance.change,
+      'percent_change': instance.percent_change,
+    };
+
+_$MarketSummaryViewModelImpl _$$MarketSummaryViewModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$MarketSummaryViewModelImpl(
+      todayNepse: json['todayNepse'] as String,
+      change: (json['change'] as num).toDouble(),
+      percentChange: (json['percentChange'] as num).toDouble(),
+    );
+
+Map<String, dynamic> _$$MarketSummaryViewModelImplToJson(
+        _$MarketSummaryViewModelImpl instance) =>
+    <String, dynamic>{
+      'todayNepse': instance.todayNepse,
+      'change': instance.change,
+      'percentChange': instance.percentChange,
     };

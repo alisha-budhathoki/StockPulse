@@ -36,8 +36,8 @@ class AppTheme {
       );
 
   static InputDecorationTheme get _inputDecorationTheme => InputDecorationTheme(
-        prefixIconColor: Palette.primaryDark.shade1,
-        suffixIconColor: Palette.primaryDark.shade1,
+        prefixIconColor: Palette.primary.shade1,
+        suffixIconColor: Palette.primary.shade1,
         filled: true,
         isDense: true,
         errorMaxLines: 2,
@@ -47,13 +47,13 @@ class AppTheme {
         border: outlinedInputBorder(Palette.textDisabled.shade4),
         enabledBorder: outlinedInputBorder(Palette.textDisabled.shade5),
         disabledBorder: outlinedInputBorder(Palette.textDisabled.shade2),
-        focusedBorder: outlinedInputBorder(Palette.primaryDark.shade3),
-        errorBorder: outlinedInputBorder(Palette.errorDark.shade3),
-        focusedErrorBorder: outlinedInputBorder(Palette.errorDark.shade3),
+        focusedBorder: outlinedInputBorder(Palette.primary.shade3),
+        errorBorder: outlinedInputBorder(Palette.error.shade3),
+        focusedErrorBorder: outlinedInputBorder(Palette.error.shade3),
         labelStyle: TextStyles.bodyText3.withColor(Palette.textDisabled.shade4),
-        errorStyle: TextStyles.bodyText1.withColor(Palette.errorDark.shade3),
+        errorStyle: TextStyles.bodyText1.withColor(Palette.error.shade3),
         floatingLabelStyle:
-            TextStyles.bodyText2.withColor(Palette.primaryDark.shade3),
+            TextStyles.bodyText2.withColor(Palette.error.shade3),
       );
 
   static OutlineInputBorder outlinedInputBorder(Color color) {
@@ -68,7 +68,7 @@ class AppTheme {
         indicatorSize: TabBarIndicatorSize.tab,
         labelStyle: TextStyles.bodyText2.semibold,
         unselectedLabelStyle: TextStyles.bodyText2.semibold,
-        labelColor: Palette.primaryDark.shade3,
+        labelColor: Palette.error.shade3,
         unselectedLabelColor: Palette.textDisabled.shade3,
         labelPadding: const EdgeInsets.symmetric(horizontal: 16.0),
       );
@@ -116,7 +116,7 @@ class AppTheme {
           backgroundColor: WidgetStateProperty.resolveWith(
             (state) => state.contains(WidgetState.disabled)
                 ? Palette.textSecondary.shade5
-                : Palette.primaryDark.shade1,
+                : Palette.primary.shade1,
           ),
         ),
       );
@@ -129,7 +129,7 @@ class AppTheme {
         ),
         checkColor: WidgetStateProperty.resolveWith(
           (state) => state.contains(WidgetState.selected)
-              ? Palette.primaryDark.shade3
+              ? Palette.primary.shade3
               : Palette.textDisabled.shade3,
         ),
       );

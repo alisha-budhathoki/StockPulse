@@ -1,5 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:stock_pulse/data/models/stock_response.dart';
 import 'package:stock_pulse/presentation/home/view_models/stock_view_model.dart';
 
 part 'stock_state.freezed.dart';

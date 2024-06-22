@@ -4,7 +4,6 @@ import 'package:stock_pulse/presentation/home/stock_bloc/stock_bloc.dart';
 import 'package:stock_pulse/presentation/home/stock_bloc/stock_event.dart';
 import 'package:stock_pulse/presentation/home/stock_bloc/stock_state.dart';
 import 'package:stock_pulse/presentation/home/view_models/stock_view_model.dart';
-import 'package:stock_pulse/presentation/home/widgets/interval_selector.dart';
 import 'package:stock_pulse/presentation/home/widgets/widgets.dart';
 
 class StockGraphSection extends StatefulWidget {
@@ -15,7 +14,7 @@ class StockGraphSection extends StatefulWidget {
 }
 
 class StockGraphSectionState extends State<StockGraphSection> {
-  String selectedInterval = 'hourly';
+  String selectedInterval = 'minute';
 
   @override
   void initState() {
@@ -32,88 +31,95 @@ class StockGraphSectionState extends State<StockGraphSection> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Stock Data'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: BlocBuilder<StockBloc, StockState>(
-                builder: (context, state) {
-                  return state.when(
-                    initial: SizedBox.new,
-                    loading: () =>
-                        const Center(child: CircularProgressIndicator()),
-                    loaded: (viewModel) {
-                      final data = _getChartData(viewModel, selectedInterval);
-                      return LineChart(data: data);
-                    },
-                    error: (message) => Center(child: Text(message)),
-                  );
-                },
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 250.0,
+            child: BlocBuilder<StockBloc, StockState>(
+              builder: (context, state) {
+                return state.maybeWhen(
+                  orElse: () => const SizedBox.shrink(),
+                  loading: () => const StockGraphShimmer(),
+                  loaded: (viewModel) {
+                    final data = _getChartData(viewModel, selectedInterval);
+                    return LineChart(data: data);
+                  },
+                  error: (message) => Center(child: Text(message)),
+                );
+              },
             ),
-            IntervalSelector(
-              selectedInterval: selectedInterval,
-              onIntervalSelected: _updateInterval,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 16),
+          IntervalSelector(
+            selectedInterval: selectedInterval,
+            onIntervalSelected: _updateInterval,
+          ),
+        ],
       ),
     );
   }
 
-  List<ChartData> _getChartData(StockViewModel viewModel, String interrval) {
-    switch (selectedInterval) {
-      case 'hourly':
-        return viewModel.hourly
+  List<ChartData> _getChartData(StockViewModel viewModel, String interval) {
+    switch (interval) {
+      case 'minute':
+        return viewModel.minuteData
             .map(
               (d) => ChartData(
-                time: d.time,
-                price: d.price,
+                time: d.date,
+                index: d.index,
+                formattedTime: d.formattedTime,
+              ),
+            )
+            .toList();
+
+      case 'hourly':
+        return viewModel.hourData
+            .map(
+              (d) => ChartData(
+                time: d.date,
+                index: d.index,
                 formattedTime: d.formattedTime,
               ),
             )
             .toList();
       case 'daily':
-        return viewModel.daily
+        return viewModel.dayData
             .map(
               (d) => ChartData(
-                time: d.time,
-                price: d.price,
+                time: d.date,
+                index: d.index,
                 formattedTime: d.formattedTime,
               ),
             )
             .toList();
       case 'monthly':
-        return viewModel.monthly
+        return viewModel.monthData
             .map(
               (d) => ChartData(
-                time: d.time,
-                price: d.price,
+                time: d.date,
+                index: d.index,
                 formattedTime: d.formattedTime,
               ),
             )
             .toList();
       case 'yearly':
-        return viewModel.yearly
+        return viewModel.yearlyData
             .map(
               (d) => ChartData(
-                time: d.time,
-                price: d.price,
+                time: d.date,
+                index: d.index,
                 formattedTime: d.formattedTime,
               ),
             )
             .toList();
       default:
-        return viewModel.daily
+        return viewModel.minuteData
             .map(
               (d) => ChartData(
-                time: d.time,
-                price: d.price,
+                time: d.date,
+                index: d.index,
                 formattedTime: d.formattedTime,
               ),
             )

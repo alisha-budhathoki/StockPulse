@@ -1,11 +1,11 @@
 class ChartData {
   ChartData({
     required this.time,
-    required this.price,
+    required this.index,
     required this.formattedTime,
   });
 
   final DateTime time;
-  final double price;
+  final double index;
   final String formattedTime;
 }

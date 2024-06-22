@@ -8,7 +8,7 @@ class StockServiceImpl implements StockService {
   final RemoteSource remoteSource;
 
   String baseUrl =
-      'https://run.mocky.io/v3/366e2a71-3413-49e7-91d2-f7e2dd927df8';
+      'https://run.mocky.io/v3/94c26c8e-2cb1-4a10-be1c-eb03d84708ce';
 
   @override
   Future<StockResponse> fetchStocks() async {

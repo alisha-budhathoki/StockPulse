@@ -8,10 +8,12 @@ part 'stock_view_model.g.dart';
 @freezed
 class StockViewModel with _$StockViewModel {
   const factory StockViewModel({
-    required List<FormattedStockData> hourly,
-    required List<FormattedStockData> daily,
-    required List<FormattedStockData> monthly,
-    required List<FormattedStockData> yearly,
+    required MarketSummaryViewModel marketSummary,
+    required List<FormattedStockData> minuteData,
+    required List<FormattedStockData> hourData,
+    required List<FormattedStockData> dayData,
+    required List<FormattedStockData> monthData,
+    required List<FormattedStockData> yearlyData,
   }) = _StockViewModel;
 
   factory StockViewModel.fromJson(Map<String, dynamic> json) =>
@@ -19,10 +21,17 @@ class StockViewModel with _$StockViewModel {
 
   factory StockViewModel.fromResponse(StockResponse response) {
     return StockViewModel(
-      hourly: response.hourly.map(FormattedStockData.fromData).toList(),
-      daily: response.daily.map(FormattedStockData.fromData).toList(),
-      monthly: response.monthly.map(FormattedStockData.fromData).toList(),
-      yearly: response.yearly.map(FormattedStockData.fromData).toList(),
+      marketSummary:
+          MarketSummaryViewModel.fromData(response.data.market_sumary),
+      minuteData:
+          response.data.minute_data.map(FormattedStockData.fromData).toList(),
+      hourData:
+          response.data.hour_data.map(FormattedStockData.fromData).toList(),
+      dayData: response.data.day_data.map(FormattedStockData.fromData).toList(),
+      monthData:
+          response.data.month_data.map(FormattedStockData.fromData).toList(),
+      yearlyData:
+          response.data.yearly_data.map(FormattedStockData.fromData).toList(),
     );
   }
 }
@@ -30,9 +39,11 @@ class StockViewModel with _$StockViewModel {
 @freezed
 class FormattedStockData with _$FormattedStockData {
   const factory FormattedStockData({
-    required DateTime time,
+    required DateTime date,
     required String formattedTime,
-    required double price,
+    required double index,
+    required double change,
+    required double percent_change,
   }) = _FormattedStockData;
 
   factory FormattedStockData.fromJson(Map<String, dynamic> json) =>
@@ -40,9 +51,31 @@ class FormattedStockData with _$FormattedStockData {
 
   factory FormattedStockData.fromData(StockData data) {
     return FormattedStockData(
-      time: data.time,
-      formattedTime: DateFormat('MMMM d, yyyy').format(data.time),
-      price: data.price,
+      date: data.date,
+      formattedTime: DateFormat('MMMM d, yyyy').format(data.date),
+      index: data.index,
+      change: data.change,
+      percent_change: data.percent_change,
+    );
+  }
+}
+
+@freezed
+class MarketSummaryViewModel with _$MarketSummaryViewModel {
+  const factory MarketSummaryViewModel({
+    required String todayNepse,
+    required double change,
+    required double percentChange,
+  }) = _MarketSummaryViewModel;
+
+  factory MarketSummaryViewModel.fromJson(Map<String, dynamic> json) =>
+      _$MarketSummaryViewModelFromJson(json);
+
+  factory MarketSummaryViewModel.fromData(MarketSummary data) {
+    return MarketSummaryViewModel(
+      todayNepse: data.today_nepse,
+      change: data.change,
+      percentChange: data.percent_change,
     );
   }
 }

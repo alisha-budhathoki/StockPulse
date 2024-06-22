@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stock_pulse/ui/ui.dart';
 
 class IntervalSelector extends StatelessWidget {
   const IntervalSelector({
@@ -14,36 +15,37 @@ class IntervalSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        ChoiceChip(
-          label: const Text('1Hr'),
-          selected: selectedInterval == 'hourly',
-          onSelected: (selected) {
-            if (selected) onIntervalSelected('hourly');
+      children: _buildCustomButtons(),
+    );
+  }
+
+  List<Widget> _buildCustomButtons() {
+    const intervals = ['minute', 'hourly', 'daily', 'monthly', 'yearly'];
+    const labels = ['1Min', '1Hr', '1D', '1M', '1Y'];
+
+    return List<Widget>.generate(
+      intervals.length,
+      (index) {
+        final interval = intervals[index];
+        final label = labels[index];
+
+        return CustomButton(
+          backgroundColor: selectedInterval == interval
+              ? Palette.primary.shade4
+              : Palette.transparent,
+          foregroundColor: selectedInterval == interval
+              ? Palette.light.shade5
+              : Palette.dark.shade3,
+          labelText: label,
+          borderRadius: 16.0,
+          size: ButtonSize.small,
+          iconPosition: IconPosition.right,
+          onPressed: () {
+            onIntervalSelected(interval);
           },
-        ),
-        ChoiceChip(
-          label: const Text('1D'),
-          selected: selectedInterval == 'daily',
-          onSelected: (selected) {
-            if (selected) onIntervalSelected('daily');
-          },
-        ),
-        ChoiceChip(
-          label: const Text('1M'),
-          selected: selectedInterval == 'monthly',
-          onSelected: (selected) {
-            if (selected) onIntervalSelected('monthly');
-          },
-        ),
-        ChoiceChip(
-          label: const Text('1Y'),
-          selected: selectedInterval == 'yearly',
-          onSelected: (selected) {
-            if (selected) onIntervalSelected('yearly');
-          },
-        ),
-      ],
+          borderColor: Palette.transparent,
+        );
+      },
     );
   }
 }
