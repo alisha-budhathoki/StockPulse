@@ -6,9 +6,11 @@ class LineChartPainter extends CustomPainter {
   LineChartPainter({
     required this.data,
     this.trackballPosition,
+    required this.scale,
   });
   final List<ChartData> data;
   final Offset? trackballPosition;
+  final double scale;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -37,7 +39,7 @@ class LineChartPainter extends CustomPainter {
         .reduce((a, b) => a > b ? a : b)
         .toDouble();
 
-    final xScale = size.width / (maxX - minX);
+    final xScale = (size.width / (maxX - minX)) * scale;
     final yScale = size.height / (maxY - minY);
 
     final path = Path();
@@ -107,8 +109,8 @@ class LineChartPainter extends CustomPainter {
 
         // Draw tooltip above the trackball line
         final textSpan = TextSpan(
-          text: closestPoint.formattedTime,
-          style: TextStyle(color: Palette.dark.shade4, fontSize: 12),
+          text: '${closestPoint.formattedTime}\n Price: ${closestPoint.index}',
+          style: TextStyles.bodyText2,
         );
         final textPainter = TextPainter(
           text: textSpan,

@@ -12,20 +12,28 @@ class LineChart extends StatefulWidget {
 
 class LineChartState extends State<LineChart> {
   Offset? _trackballPosition;
+  double _scale = 1.0;
+  double _previousScale = 1.0;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GestureDetector(
-        onTapDown: (details) {
+        onScaleStart: (details) {
           setState(() {
-            _trackballPosition = details.localPosition;
+            _previousScale = _scale;
           });
         },
-        onPanUpdate: (details) {
+        onScaleUpdate: (details) {
           setState(() {
-            _trackballPosition = details.localPosition;
+            _scale = (_previousScale * details.scale).clamp(1.0, 5.0);
+            _trackballPosition = details.focalPoint;
+          });
+        },
+        onScaleEnd: (details) {
+          setState(() {
+            _previousScale = 1.0;
           });
         },
         child: CustomPaint(
@@ -33,6 +41,7 @@ class LineChartState extends State<LineChart> {
           painter: LineChartPainter(
             data: widget.data,
             trackballPosition: _trackballPosition,
+            scale: _scale,
           ),
         ),
       ),
