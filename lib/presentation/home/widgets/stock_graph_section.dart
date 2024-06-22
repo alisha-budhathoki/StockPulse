@@ -7,14 +7,14 @@ import 'package:stock_pulse/presentation/home/view_models/stock_view_model.dart'
 import 'package:stock_pulse/presentation/home/widgets/interval_selector.dart';
 import 'package:stock_pulse/presentation/home/widgets/widgets.dart';
 
-class StockSection extends StatefulWidget {
-  const StockSection({super.key});
+class StockGraphSection extends StatefulWidget {
+  const StockGraphSection({super.key});
 
   @override
-  StockSectionState createState() => StockSectionState();
+  StockGraphSectionState createState() => StockGraphSectionState();
 }
 
-class StockSectionState extends State<StockSection> {
+class StockGraphSectionState extends State<StockGraphSection> {
   String selectedInterval = 'hourly';
 
   @override
