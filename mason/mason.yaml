@@ -1,6 +1,0 @@
-bricks:
-  module:
-    path: bricks/module
-
-  service:
-    path: bricks/service
