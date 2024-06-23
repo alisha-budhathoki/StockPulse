@@ -62,7 +62,8 @@ class IntervalSelectorState extends State<IntervalSelector> {
   void _scrollToSelectedButton(int index) {
     _scrollController.scrollTo(
       index: index,
-      alignment: 0.5, // Centers the selected button
+      // Centers the selected button
+      alignment: 0.5,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeInOut,
     );

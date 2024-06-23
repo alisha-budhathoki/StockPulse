@@ -78,7 +78,7 @@ class LineChartPainter extends CustomPainter {
 
       canvas.drawPath(path, linePaint);
 
-      // Draw the horizontal dotted line at index zero
+      // Drawing the horizontal dotted line at index zero
       final dottedPath = Path();
       final zeroY = size.height - (0 - minY) * yScale;
       for (var x = 0.0; x < size.width; x += 5) {
@@ -95,7 +95,7 @@ class LineChartPainter extends CustomPainter {
           trackballPaint,
         );
 
-        // Find the closest data point to the trackball
+        // Finding the closest data point to the trackball
         final normalizedTrackballX = trackballX / size.width;
         final index = (normalizedTrackballX * data.length)
             .clamp(0, data.length - 1)
@@ -107,7 +107,7 @@ class LineChartPainter extends CustomPainter {
 
         canvas.drawCircle(Offset(closestX, closestY), 5, trackballPaint);
 
-        // Draw tooltip above the trackball line
+        // Drawing tooltip above the trackball line
         final textSpan = TextSpan(
           text: '${closestPoint.formattedTime}\n Price: ${closestPoint.index}',
           style: TextStyles.bodyText2,
@@ -119,8 +119,8 @@ class LineChartPainter extends CustomPainter {
         textPainter.layout();
 
         final tooltipX = trackballX - (textPainter.width / 2);
-        const tooltipY = 0.0; // Position it above the top of the chart
-
+        // Positioning it above the top of the chart
+        const tooltipY = 0.0;
         final tooltipWidth = textPainter.width + 8;
         final tooltipHeight = textPainter.height + 4;
 

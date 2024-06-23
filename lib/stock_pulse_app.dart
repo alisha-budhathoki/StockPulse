@@ -4,8 +4,8 @@ import 'package:stock_pulse/core/di/locator.dart';
 import 'package:stock_pulse/core/routing/routing_index.dart';
 import 'package:stock_pulse/ui/ui.dart';
 
-class StockPulse extends StatelessWidget {
-  StockPulse({super.key});
+class StockPulseApp extends StatelessWidget {
+  StockPulseApp({super.key});
 
   final AppRouter _appRouter = locator<AppRouter>();
 

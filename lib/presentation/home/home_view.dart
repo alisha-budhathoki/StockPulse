@@ -17,8 +17,8 @@ class HomeView extends StatelessWidget {
       ),
       child: PaddedScaffold(
         appBar: AppBar(),
-        body: const Column(
-          children: [
+        body: ListView(
+          children: const [
             MarketSummarySection(),
             StockGraphSection(),
           ],

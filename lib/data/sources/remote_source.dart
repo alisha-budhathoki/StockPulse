@@ -1,12 +1,12 @@
 abstract class RemoteSource {
-  ///return map of data when success and throws [ServerException]
+  ///return map of data when success and throws [Exception]
   ///with status code and message in any failure
   Future<Map<String, dynamic>> get(
     String url, {
     Map<String, dynamic> queryParam,
   });
 
-  ///return map of data when success and throws [ServerException]
+  ///return map of data when success and throws [Exception]
   /// with status code and message in any failure
   Future<Map<String, dynamic>> post(
     String url, {
