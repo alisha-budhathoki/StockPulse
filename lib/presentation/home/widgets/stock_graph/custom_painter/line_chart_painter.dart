@@ -107,9 +107,23 @@ class LineChartPainter extends CustomPainter {
 
         canvas.drawCircle(Offset(closestX, closestY), 5, trackballPaint);
 
+        // Determine if the closest point is minute, hour, day, month, or year data
+        final isMinute = data.length > 1 &&
+            data[1].time.difference(data[0].time).inMinutes == 1;
+        final isHour = data.length > 1 &&
+            data[1].time.difference(data[0].time).inHours == 1;
+
+        String timePrefix;
+        if (isMinute || isHour) {
+          timePrefix = 'Time: ';
+        } else {
+          timePrefix = 'Date: ';
+        }
+
         // Drawing tooltip above the trackball line
         final textSpan = TextSpan(
-          text: '${closestPoint.formattedTime}\n Price: ${closestPoint.index}',
+          text:
+              '$timePrefix${closestPoint.formattedTime}\nPrice: ${closestPoint.index}',
           style: TextStyles.bodyText2,
         );
         final textPainter = TextPainter(

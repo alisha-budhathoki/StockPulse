@@ -23,10 +23,12 @@ class StockViewModel with _$StockViewModel {
     return StockViewModel(
       marketSummary:
           MarketSummaryViewModel.fromData(response.data.market_sumary),
-      minuteData:
-          response.data.minute_data.map(FormattedStockData.fromData).toList(),
-      hourData:
-          response.data.hour_data.map(FormattedStockData.fromData).toList(),
+      minuteData: response.data.minute_data
+          .map((data) => FormattedStockData.fromData(data, isMinute: true))
+          .toList(),
+      hourData: response.data.hour_data
+          .map((data) => FormattedStockData.fromData(data, isHour: true))
+          .toList(),
       dayData: response.data.day_data.map(FormattedStockData.fromData).toList(),
       monthData:
           response.data.month_data.map(FormattedStockData.fromData).toList(),
@@ -49,10 +51,23 @@ class FormattedStockData with _$FormattedStockData {
   factory FormattedStockData.fromJson(Map<String, dynamic> json) =>
       _$FormattedStockDataFromJson(json);
 
-  factory FormattedStockData.fromData(StockData data) {
+  factory FormattedStockData.fromData(
+    StockData data, {
+    bool isMinute = false,
+    bool isHour = false,
+  }) {
+    String formattedTime;
+    if (isMinute) {
+      formattedTime = DateFormat('HH:mm a').format(data.date);
+    } else if (isHour) {
+      formattedTime = DateFormat('HH:00 a').format(data.date);
+    } else {
+      formattedTime = DateFormat('MMM d, yyyy').format(data.date);
+    }
+
     return FormattedStockData(
       date: data.date,
-      formattedTime: DateFormat('MMMM d, yyyy').format(data.date),
+      formattedTime: formattedTime,
       index: data.index,
       change: data.change,
       percentChange: data.percent_change,

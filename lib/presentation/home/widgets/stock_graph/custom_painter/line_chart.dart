@@ -18,7 +18,7 @@ class LineChartState extends State<LineChart> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(28.0),
       child: GestureDetector(
         onScaleStart: (details) {
           setState(() {
