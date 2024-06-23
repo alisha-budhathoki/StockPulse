@@ -20,6 +20,7 @@ class HomeView extends StatelessWidget {
         body: ListView(
           children: const [
             MarketSummarySection(),
+            SizedBox(height: 20.0),
             StockGraphSection(),
           ],
         ),

@@ -126,7 +126,7 @@ class LineChartPainter extends CustomPainter {
         final textSpan = TextSpan(
           text:
               '$timePrefix${closestPoint.formattedTime}\nPrice: ${closestPoint.index}',
-          style: TextStyles.bodyText2,
+          style: TextStyles.bodyText1,
         );
         final textPainter = TextPainter(
           text: textSpan,
