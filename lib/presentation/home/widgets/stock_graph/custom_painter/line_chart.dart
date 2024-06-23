@@ -23,12 +23,13 @@ class LineChartState extends State<LineChart> {
         onScaleStart: (details) {
           setState(() {
             _previousScale = _scale;
+            _trackballPosition = details.localFocalPoint;
           });
         },
         onScaleUpdate: (details) {
           setState(() {
             _scale = (_previousScale * details.scale).clamp(1.0, 5.0);
-            _trackballPosition = details.focalPoint;
+            _trackballPosition = details.localFocalPoint;
           });
         },
         onScaleEnd: (details) {

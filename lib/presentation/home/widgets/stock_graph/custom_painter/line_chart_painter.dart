@@ -88,15 +88,17 @@ class LineChartPainter extends CustomPainter {
       canvas.drawPath(dottedPath, dottedLinePaint);
 
       if (trackballPosition != null) {
-        final trackballX = trackballPosition!.dx.clamp(0.0, size.width);
+        // Clamp the trackballPosition within the valid range
+        final clampedTrackballX = trackballPosition!.dx.clamp(0.0, size.width);
+
         canvas.drawLine(
-          Offset(trackballX, 0),
-          Offset(trackballX, size.height),
+          Offset(clampedTrackballX, 0),
+          Offset(clampedTrackballX, size.height),
           trackballPaint,
         );
 
         // Finding the closest data point to the trackball
-        final normalizedTrackballX = trackballX / size.width;
+        final normalizedTrackballX = clampedTrackballX / size.width;
         final index = (normalizedTrackballX * data.length)
             .clamp(0, data.length - 1)
             .toInt();
@@ -132,9 +134,14 @@ class LineChartPainter extends CustomPainter {
         );
         textPainter.layout();
 
-        final tooltipX = trackballX - (textPainter.width / 2);
-        // Positioning it above the top of the chart
-        const tooltipY = 0.0;
+        final tooltipX = clampedTrackballX - (textPainter.width / 2);
+
+        // Positioning it above the highest curve point
+        final maxYValue =
+            data.map((d) => d.index).reduce((a, b) => a > b ? a : b);
+        final highestPointY = size.height - (maxYValue - minY) * yScale;
+        final tooltipY = highestPointY - textPainter.height - 10;
+
         final tooltipWidth = textPainter.width + 8;
         final tooltipHeight = textPainter.height + 4;
 
