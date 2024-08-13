@@ -45,7 +45,10 @@ class StockGraphSectionState extends State<StockGraphSection> {
                   loading: () => const StockGraphShimmer(),
                   loaded: (viewModel) {
                     final data = _getChartData(viewModel, selectedInterval);
-                    return LineChart(data: data);
+                    return LineChart(
+                      data: data,
+                      isHourly: selectedInterval == 'hourly',
+                    );
                   },
                   error: (message) => Center(child: Text(message)),
                 );
