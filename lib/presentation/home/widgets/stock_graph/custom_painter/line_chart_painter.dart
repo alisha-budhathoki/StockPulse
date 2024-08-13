@@ -20,17 +20,12 @@ class LineChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final redPaint = Paint()
-      ..color = Colors.green.withOpacity(0.5)
+      ..color = Colors.red
       ..strokeWidth = 4.0
       ..style = PaintingStyle.stroke;
 
     final greenPaint = Paint()
       ..color = Colors.green
-      ..strokeWidth = 4.0
-      ..style = PaintingStyle.stroke;
-
-    final bluePaint = Paint()
-      ..color = Colors.blue
       ..strokeWidth = 4.0
       ..style = PaintingStyle.stroke;
 
@@ -41,6 +36,11 @@ class LineChartPainter extends CustomPainter {
     final dottedLinePaint = Paint()
       ..color = Palette.textDisabled.shade3
       ..strokeWidth = 1.0
+      ..style = PaintingStyle.stroke;
+
+    final dashedLinePaint = Paint()
+      ..color = Colors.grey
+      ..strokeWidth = 2.0
       ..style = PaintingStyle.stroke;
 
     final minY = data.map((d) => d.index).reduce((a, b) => a < b ? a : b);
@@ -58,6 +58,17 @@ class LineChartPainter extends CustomPainter {
     final yScale = size.height / (maxY - minY);
 
     if (data.isNotEmpty) {
+      // Draw the initial horizontal dashed line
+      final initialY = size.height - (data.first.index - minY) * yScale;
+      final initialLinePath = Path();
+
+      for (var x = 0; x < size.width; x += 10) {
+        initialLinePath.moveTo(x.toDouble(), initialY);
+        initialLinePath.lineTo((x + 5).toDouble(), initialY);
+      }
+
+      canvas.drawPath(initialLinePath, dashedLinePaint);
+
       final path = Path();
       final firstPoint = data.first;
       final firstX = (firstPoint.time.millisecondsSinceEpoch - minX) * xScale;
@@ -120,12 +131,14 @@ class LineChartPainter extends CustomPainter {
             (closestPoint.time.millisecondsSinceEpoch - minX) * xScale;
         final closestY = size.height - (closestPoint.index - minY) * yScale;
 
+        // Draw trackball line
         canvas.drawLine(
           Offset(clampedTrackballX, 0),
           Offset(clampedTrackballX, size.height),
           trackballPaint,
         );
 
+        // Draw circle at trackball position
         canvas.drawCircle(
           Offset(clampedTrackballX, closestY),
           5,
@@ -138,11 +151,11 @@ class LineChartPainter extends CustomPainter {
           onTrackballPointReached();
         }
 
-        // Draw the tooltip above the trackball line
+        // Draw the tooltip at the top of the line (above the closest point)
         final textSpan = TextSpan(
           text:
               'Time: ${closestPoint.formattedTime}\nPrice: ${closestPoint.index}',
-          style: TextStyles.bodyText1,
+          style: TextStyles.bodyText2,
         );
         final textPainter = TextPainter(
           text: textSpan,
@@ -150,13 +163,17 @@ class LineChartPainter extends CustomPainter {
         );
         textPainter.layout();
 
-        final tooltipX = clampedTrackballX - (textPainter.width / 2);
-        final tooltipY = closestY - textPainter.height - 10;
+        // Position the tooltip at the top of the line
+        var tooltipX = clampedTrackballX - (textPainter.width / 2);
+        const tooltipY = 0; // Position at the top of the chart
+
+        // Clamp the tooltip X position within the bounds of the chart
+        tooltipX = tooltipX.clamp(0.0, size.width - textPainter.width - 8);
 
         final tooltipRect = RRect.fromRectAndRadius(
           Rect.fromLTWH(
             tooltipX,
-            tooltipY,
+            tooltipY.toDouble(),
             textPainter.width + 8,
             textPainter.height + 4,
           ),
